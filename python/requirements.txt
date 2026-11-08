@@ -1,0 +1,2 @@
+uvicorn==0.30.6
+gunicorn==23.0.0

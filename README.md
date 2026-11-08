@@ -1,90 +1,53 @@
-# Benchmark de Desempenho: Rust vs Java vs Python (Carga de CPU com JMeter)
+# Benchmark de Desempenho: Rust vs Java vs Python (Carga de CPU + Telemetria da VM)
 
-Este repositório contém três servidores HTTP implementados em **Rust**, **Java** e **Python** que executam **exatamente o mesmo algoritmo CPU-bound** (verificação de números primos até `N` por divisão direta em complexidade $O(N\sqrt{N})$).
-
-## Endpoints
-
-Todos os servidores escutam por padrão na porta `8080` (configurável via variável de ambiente `PORT`):
-
-- `GET /compute?n=50000` — Executa o cálculo de números primos de `2` até `n` (padrão: `50000`) e retorna:
-  ```json
-  {
-    "lang": "rust | java | python",
-    "n": 50000,
-    "primes": 5133,
-    "elapsed_ms": 4.125
-  }
-  ```
-- `GET /health` — Endpoint leve para verificar se o servidor está online.
-
-> **Dica para o JMeter:** Você pode variar a intensidade de CPU por requisição direto pelo JMeter mudando apenas o parâmetro `?n=` (ex.: `n=10000` para carga leve, `n=100000` para carga moderada, `n=300000` para carga pesada), sem precisar recompilar nenhum código.
+Este repositório contém três servidores HTTP implementados em **Rust**, **Java** e **Python** que:
+1. Executam **exatamente o mesmo algoritmo CPU-bound** (verificação de números primos até `N` por divisão direta em complexidade $O(N\sqrt{N})$).
+2. Monitoram **em background (a cada 1 segundo, do início ao fim)** o uso de **CPU e Memória RAM da VM e do próprio processo**, devolvendo toda a linha do tempo na rota `/metrics`.
 
 ---
 
-## Como rodar cada linguagem na VM
+## Rotas Disponíveis (Porta `8080`)
 
-> **Importante:** Rode um servidor por vez na VM (ou em portas separadas) para que um não dispute CPU/memória com o outro durante a bateria de testes.
+- `GET /compute?n=50000` — Rota que o **JMeter** vai atacar. Executa o cálculo de números primos até `n`.
+- `GET /metrics` — Devolve um JSON completo com o **resumo (`summary`)** e o **histórico segundo a segundo (`history`)** de CPU e Memória da VM desde o início até o momento da chamada.
+- `GET /metrics/reset` — Zera o cronômetro e o histórico de métricas da VM (útil para chamar imediatamente antes de apertar Play no JMeter).
+- `GET /health` — Verifica se o servidor está online.
 
-### 1. Rust (`rust/`)
-Sempre compile e execute em modo `--release` para ativar as otimizações do LLVM (`opt-level = 3` e `lto = true`):
+---
+
+## Como instalar e rodar na VM
+
+### 1. Python ([python/server.py](python/server.py)) — Usa `psutil`
 ```bash
-cd rust
-cargo build --release
-PORT=8080 ./target/release/benchmark-rust
+sudo apt install -y python3-psutil
+cd ~/analise_de_desempenho/python
+python3 server.py
 ```
-Para limitar a quantidade de threads do Tokio na VM (ex.: testar escalabilidade com 1, 2, 4 núcleos):
-```bash
-TOKIO_WORKER_THREADS=4 PORT=8080 ./target/release/benchmark-rust
-```
 
-### 2. Java (`java/`)
-Usa a biblioteca nativa `com.sun.net.httpserver.HttpServer` do JDK (zero dependências externas).
+### 2. Java ([java/Server.java](java/Server.java)) — Usa `OperatingSystemMXBean` nativo
 ```bash
-cd java
+cd ~/analise_de_desempenho/java
 javac Server.java
-PORT=8080 THREADS=8 java -Xms512m -Xmx2g Server
+java Server
 ```
-*(A variável `THREADS` define o tamanho do pool de threads. Por padrão usa `2 * núcleos da VM`).*
 
-### 3. Python (`python/`)
-Devido ao **GIL (Global Interpreter Lock)** do CPython, um único processo Python usa apenas 1 núcleo de CPU por vez em tarefas CPU-bound. Você pode testar dois cenários:
-
-- **Cenário A — Processo único (impacto do GIL):**
-  ```bash
-  cd python
-  PORT=8080 python3 server.py
-  ```
-- **Cenário B — Múltiplos processos workers (Uvicorn/Gunicorn usando todos os núcleos da VM):**
-  ```bash
-  cd python
-  python3 -m venv .venv
-  source .venv/bin/activate
-  pip install -r requirements.txt
-  uvicorn server:app --host 0.0.0.0 --port 8080 --workers 4 --no-access-log
-  ```
+### 3. Rust ([rust/src/main.rs](rust/src/main.rs)) — Usa `sysinfo` (equivalente ao `psutil`)
+```bash
+cd ~/analise_de_desempenho/rust
+cargo build --release
+./target/release/benchmark-rust
+```
 
 ---
 
-## Ajustes Recomendados na VM Linux antes do Teste com JMeter
+## Como coletar os dados da VM na sua máquina e salvar no Banco de Dados
 
-Quando o JMeter dispara centenas ou milhares de requisições simultâneas, o próprio sistema operacional pode rejeitar conexões antes mesmo de a linguagem ser testada. Ajuste na VM:
+Logo após terminar uma bateria de testes no JMeter, rode **na sua máquina física** o script [coletar_metricas.py](coletar_metricas.py):
 
-1. **Aumentar o limite de descritores de arquivos (sockets abertos):**
-   ```bash
-   ulimit -n 65535
-   ```
-2. **Aumentar a fila de conexões TCP pendentes (backlog) e reutilização de portas:**
-   ```bash
-   sudo sysctl -w net.core.somaxconn=4096
-   sudo sysctl -w net.ipv4.tcp_max_syn_backlog=4096
-   sudo sysctl -w net.ipv4.tcp_tw_reuse=1
-   ```
-3. **Limitar núcleos de CPU na VM (opcional, ótimo para o relatório):**
-   Você pode usar o comando `taskset` no Linux para forçar o servidor a rodar em apenas 1, 2 ou 4 núcleos sem precisar reiniciar a VM:
-   ```bash
-   # Exemplo: rodar apenas no nucleo 0 (1 vCPU)
-   taskset -c 0 ./target/release/benchmark-rust
+```bash
+python3 coletar_metricas.py <IP_DA_VM> "2vcpu_4gb_100req"
+```
 
-   # Exemplo: rodar nos nucleos 0 e 1 (2 vCPUs)
-   taskset -c 0,1 java Server
-   ```
+Ele faz um `GET http://<IP_DA_VM>:8080/metrics`, exibe o resumo no terminal e salva automaticamente:
+1. No banco de dados SQLite local **`resultados_vm.db`** (tabelas `execucoes` e `historico_vm` com todos os segundos do teste).
+2. Uma cópia bruta em JSON na pasta **`resultados/`**.

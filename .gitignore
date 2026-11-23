@@ -1,0 +1,50 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+venv/
+.venv/
+env/
+.env
+.pytest_cache/
+
+# --- Java / Maven / Spring Boot ---
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+
+# --- Rust / Cargo ---
+rust/target/
+**/*.rs.bk
+
+# --- JMeter / Logs / Zips / Temporarios ---
+temp/
+*.zip
+*.tar.gz
+*.log
+*.jtl
+jmeter.log
+
+# --- Banco de dados binario gerado localmente ---
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# --- IDEs e Sistema Operacional ---
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db

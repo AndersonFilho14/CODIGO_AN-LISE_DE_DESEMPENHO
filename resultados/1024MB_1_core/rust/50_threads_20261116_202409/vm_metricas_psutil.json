@@ -1,0 +1,262 @@
+{
+  "lang": "rust",
+  "limits": {
+    "cores": 1,
+    "ram_mb": 1024.0
+  },
+  "summary": {
+    "duration_sec": 30.0,
+    "raw_duration_sec": 32.67,
+    "samples_count": 30,
+    "total_requests": 10192,
+    "cpu_percent_avg": 97.35,
+    "cpu_percent_max": 100.0,
+    "mem_percent_avg": 0.99,
+    "mem_percent_max": 1.0,
+    "mem_used_mb_max": 10.2,
+    "mem_total_mb": 1024.0,
+    "process_mem_mb_max": 10.2
+  },
+  "history": [
+    {
+      "elapsed_sec": 1.0,
+      "cpu_percent": 74.51,
+      "mem_percent": 0.91,
+      "mem_used_mb": 9.33,
+      "process_mem_mb": 9.33,
+      "requests_so_far": 244
+    },
+    {
+      "elapsed_sec": 2.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.93,
+      "mem_used_mb": 9.49,
+      "process_mem_mb": 9.49,
+      "requests_so_far": 588
+    },
+    {
+      "elapsed_sec": 3.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.95,
+      "mem_used_mb": 9.72,
+      "process_mem_mb": 9.72,
+      "requests_so_far": 931
+    },
+    {
+      "elapsed_sec": 4.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.97,
+      "mem_used_mb": 9.92,
+      "process_mem_mb": 9.92,
+      "requests_so_far": 1284
+    },
+    {
+      "elapsed_sec": 5.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.99,
+      "mem_used_mb": 10.1,
+      "process_mem_mb": 10.1,
+      "requests_so_far": 1634
+    },
+    {
+      "elapsed_sec": 6.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.99,
+      "mem_used_mb": 10.11,
+      "process_mem_mb": 10.11,
+      "requests_so_far": 1983
+    },
+    {
+      "elapsed_sec": 7.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.99,
+      "mem_used_mb": 10.13,
+      "process_mem_mb": 10.13,
+      "requests_so_far": 2333
+    },
+    {
+      "elapsed_sec": 8.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.99,
+      "mem_used_mb": 10.17,
+      "process_mem_mb": 10.17,
+      "requests_so_far": 2683
+    },
+    {
+      "elapsed_sec": 9.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 3032
+    },
+    {
+      "elapsed_sec": 10.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 3382
+    },
+    {
+      "elapsed_sec": 11.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 3731
+    },
+    {
+      "elapsed_sec": 12.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 4080
+    },
+    {
+      "elapsed_sec": 13.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 4430
+    },
+    {
+      "elapsed_sec": 14.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 4776
+    },
+    {
+      "elapsed_sec": 15.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 5128
+    },
+    {
+      "elapsed_sec": 16.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 5477
+    },
+    {
+      "elapsed_sec": 17.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 5829
+    },
+    {
+      "elapsed_sec": 18.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 6177
+    },
+    {
+      "elapsed_sec": 19.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 6528
+    },
+    {
+      "elapsed_sec": 20.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 6882
+    },
+    {
+      "elapsed_sec": 21.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 7232
+    },
+    {
+      "elapsed_sec": 22.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 7584
+    },
+    {
+      "elapsed_sec": 23.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 7933
+    },
+    {
+      "elapsed_sec": 24.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 8283
+    },
+    {
+      "elapsed_sec": 25.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 8634
+    },
+    {
+      "elapsed_sec": 26.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 8982
+    },
+    {
+      "elapsed_sec": 27.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 9333
+    },
+    {
+      "elapsed_sec": 28.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 9684
+    },
+    {
+      "elapsed_sec": 29.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 10035
+    },
+    {
+      "elapsed_sec": 30.0,
+      "cpu_percent": 46.0,
+      "mem_percent": 0.94,
+      "mem_used_mb": 9.59,
+      "process_mem_mb": 9.59,
+      "requests_so_far": 10192
+    }
+  ]
+}

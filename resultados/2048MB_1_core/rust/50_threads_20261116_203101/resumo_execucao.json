@@ -1,0 +1,40 @@
+{
+  "data_hora": "2026-11-16 20:31:35",
+  "configuracao_vm": {
+    "pasta_vm": "2048MB_1_core",
+    "ram_label": "2048MB",
+    "ram_mb": 2048,
+    "cores_label": "1_core",
+    "cores": 1
+  },
+  "parametros_teste": {
+    "linguagem": "rust",
+    "threads": 50,
+    "rampup_sec": 5,
+    "duration_sec": 30,
+    "n_primos": 50000
+  },
+  "jmeter_resultados": {
+    "samples": 10119,
+    "errors": 0,
+    "error_pct": 0.0,
+    "throughput_rps": 335.03,
+    "avg_ms": 136.48,
+    "min_ms": 3.0,
+    "p95_ms": 159.0,
+    "max_ms": 202.0
+  },
+  "vm_resumo_recursos": {
+    "duration_sec": 30.0,
+    "raw_duration_sec": 32.69,
+    "samples_count": 30,
+    "total_requests": 10119,
+    "cpu_percent_avg": 96.48,
+    "cpu_percent_max": 100.0,
+    "mem_percent_avg": 0.49,
+    "mem_percent_max": 0.5,
+    "mem_used_mb_max": 10.22,
+    "mem_total_mb": 2048.0,
+    "process_mem_mb_max": 10.22
+  }
+}

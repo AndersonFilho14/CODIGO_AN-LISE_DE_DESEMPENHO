@@ -1,0 +1,262 @@
+{
+  "lang": "rust",
+  "limits": {
+    "cores": 1,
+    "ram_mb": 1024.0
+  },
+  "summary": {
+    "duration_sec": 30.0,
+    "raw_duration_sec": 32.74,
+    "samples_count": 30,
+    "total_requests": 9916,
+    "cpu_percent_avg": 94.71,
+    "cpu_percent_max": 100.0,
+    "mem_percent_avg": 0.99,
+    "mem_percent_max": 1.0,
+    "mem_used_mb_max": 10.2,
+    "mem_total_mb": 1024.0,
+    "process_mem_mb_max": 10.2
+  },
+  "history": [
+    {
+      "elapsed_sec": 1.0,
+      "cpu_percent": 67.0,
+      "mem_percent": 0.91,
+      "mem_used_mb": 9.33,
+      "process_mem_mb": 9.33,
+      "requests_so_far": 213
+    },
+    {
+      "elapsed_sec": 2.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.93,
+      "mem_used_mb": 9.47,
+      "process_mem_mb": 9.47,
+      "requests_so_far": 528
+    },
+    {
+      "elapsed_sec": 3.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.94,
+      "mem_used_mb": 9.66,
+      "process_mem_mb": 9.66,
+      "requests_so_far": 878
+    },
+    {
+      "elapsed_sec": 4.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.96,
+      "mem_used_mb": 9.85,
+      "process_mem_mb": 9.85,
+      "requests_so_far": 1208
+    },
+    {
+      "elapsed_sec": 5.0,
+      "cpu_percent": 99.08,
+      "mem_percent": 0.98,
+      "mem_used_mb": 10.08,
+      "process_mem_mb": 10.08,
+      "requests_so_far": 1567
+    },
+    {
+      "elapsed_sec": 6.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.99,
+      "mem_used_mb": 10.12,
+      "process_mem_mb": 10.12,
+      "requests_so_far": 1901
+    },
+    {
+      "elapsed_sec": 7.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.99,
+      "mem_used_mb": 10.17,
+      "process_mem_mb": 10.17,
+      "requests_so_far": 2258
+    },
+    {
+      "elapsed_sec": 8.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 2614
+    },
+    {
+      "elapsed_sec": 9.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 2968
+    },
+    {
+      "elapsed_sec": 10.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 3327
+    },
+    {
+      "elapsed_sec": 11.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 3683
+    },
+    {
+      "elapsed_sec": 12.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 4038
+    },
+    {
+      "elapsed_sec": 13.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 4386
+    },
+    {
+      "elapsed_sec": 14.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 4737
+    },
+    {
+      "elapsed_sec": 15.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 5089
+    },
+    {
+      "elapsed_sec": 16.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 5438
+    },
+    {
+      "elapsed_sec": 17.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 5772
+    },
+    {
+      "elapsed_sec": 18.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 6129
+    },
+    {
+      "elapsed_sec": 19.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 6483
+    },
+    {
+      "elapsed_sec": 20.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 6841
+    },
+    {
+      "elapsed_sec": 21.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 7197
+    },
+    {
+      "elapsed_sec": 22.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 7549
+    },
+    {
+      "elapsed_sec": 23.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 7900
+    },
+    {
+      "elapsed_sec": 24.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 8258
+    },
+    {
+      "elapsed_sec": 25.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 8607
+    },
+    {
+      "elapsed_sec": 26.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 8962
+    },
+    {
+      "elapsed_sec": 27.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 9312
+    },
+    {
+      "elapsed_sec": 28.0,
+      "cpu_percent": 99.07,
+      "mem_percent": 1.0,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 9665
+    },
+    {
+      "elapsed_sec": 29.0,
+      "cpu_percent": 76.24,
+      "mem_percent": 0.94,
+      "mem_used_mb": 9.63,
+      "process_mem_mb": 9.63,
+      "requests_so_far": 9916
+    },
+    {
+      "elapsed_sec": 30.0,
+      "cpu_percent": 0.0,
+      "mem_percent": 0.94,
+      "mem_used_mb": 9.63,
+      "process_mem_mb": 9.63,
+      "requests_so_far": 9916
+    }
+  ]
+}

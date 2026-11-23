@@ -1,0 +1,262 @@
+{
+  "lang": "rust",
+  "limits": {
+    "cores": 1,
+    "ram_mb": 2048.0
+  },
+  "summary": {
+    "duration_sec": 30.0,
+    "raw_duration_sec": 32.59,
+    "samples_count": 30,
+    "total_requests": 10128,
+    "cpu_percent_avg": 96.57,
+    "cpu_percent_max": 100.0,
+    "mem_percent_avg": 0.5,
+    "mem_percent_max": 0.51,
+    "mem_used_mb_max": 10.54,
+    "mem_total_mb": 2048.0,
+    "process_mem_mb_max": 10.54
+  },
+  "history": [
+    {
+      "elapsed_sec": 1.0,
+      "cpu_percent": 81.0,
+      "mem_percent": 0.46,
+      "mem_used_mb": 9.33,
+      "process_mem_mb": 9.33,
+      "requests_so_far": 262
+    },
+    {
+      "elapsed_sec": 2.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.46,
+      "mem_used_mb": 9.5,
+      "process_mem_mb": 9.5,
+      "requests_so_far": 610
+    },
+    {
+      "elapsed_sec": 3.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.47,
+      "mem_used_mb": 9.71,
+      "process_mem_mb": 9.71,
+      "requests_so_far": 955
+    },
+    {
+      "elapsed_sec": 4.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.49,
+      "mem_used_mb": 9.95,
+      "process_mem_mb": 9.95,
+      "requests_so_far": 1309
+    },
+    {
+      "elapsed_sec": 5.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.5,
+      "mem_used_mb": 10.18,
+      "process_mem_mb": 10.18,
+      "requests_so_far": 1657
+    },
+    {
+      "elapsed_sec": 6.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.5,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 2011
+    },
+    {
+      "elapsed_sec": 7.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.5,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 2364
+    },
+    {
+      "elapsed_sec": 8.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.5,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 2718
+    },
+    {
+      "elapsed_sec": 9.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.5,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 3067
+    },
+    {
+      "elapsed_sec": 10.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.5,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 3416
+    },
+    {
+      "elapsed_sec": 11.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.5,
+      "mem_used_mb": 10.2,
+      "process_mem_mb": 10.2,
+      "requests_so_far": 3769
+    },
+    {
+      "elapsed_sec": 12.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.5,
+      "mem_used_mb": 10.21,
+      "process_mem_mb": 10.21,
+      "requests_so_far": 4121
+    },
+    {
+      "elapsed_sec": 13.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.5,
+      "mem_used_mb": 10.21,
+      "process_mem_mb": 10.21,
+      "requests_so_far": 4470
+    },
+    {
+      "elapsed_sec": 14.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.5,
+      "mem_used_mb": 10.22,
+      "process_mem_mb": 10.22,
+      "requests_so_far": 4823
+    },
+    {
+      "elapsed_sec": 15.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.5,
+      "mem_used_mb": 10.22,
+      "process_mem_mb": 10.22,
+      "requests_so_far": 5173
+    },
+    {
+      "elapsed_sec": 16.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.5,
+      "mem_used_mb": 10.22,
+      "process_mem_mb": 10.22,
+      "requests_so_far": 5523
+    },
+    {
+      "elapsed_sec": 17.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.5,
+      "mem_used_mb": 10.22,
+      "process_mem_mb": 10.22,
+      "requests_so_far": 5873
+    },
+    {
+      "elapsed_sec": 18.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.5,
+      "mem_used_mb": 10.22,
+      "process_mem_mb": 10.22,
+      "requests_so_far": 6222
+    },
+    {
+      "elapsed_sec": 19.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.51,
+      "mem_used_mb": 10.49,
+      "process_mem_mb": 10.49,
+      "requests_so_far": 6563
+    },
+    {
+      "elapsed_sec": 20.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.51,
+      "mem_used_mb": 10.52,
+      "process_mem_mb": 10.52,
+      "requests_so_far": 6928
+    },
+    {
+      "elapsed_sec": 21.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.51,
+      "mem_used_mb": 10.53,
+      "process_mem_mb": 10.53,
+      "requests_so_far": 7276
+    },
+    {
+      "elapsed_sec": 22.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.51,
+      "mem_used_mb": 10.53,
+      "process_mem_mb": 10.53,
+      "requests_so_far": 7626
+    },
+    {
+      "elapsed_sec": 23.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.51,
+      "mem_used_mb": 10.53,
+      "process_mem_mb": 10.53,
+      "requests_so_far": 7979
+    },
+    {
+      "elapsed_sec": 24.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.51,
+      "mem_used_mb": 10.53,
+      "process_mem_mb": 10.53,
+      "requests_so_far": 8328
+    },
+    {
+      "elapsed_sec": 25.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.51,
+      "mem_used_mb": 10.53,
+      "process_mem_mb": 10.53,
+      "requests_so_far": 8676
+    },
+    {
+      "elapsed_sec": 26.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.51,
+      "mem_used_mb": 10.54,
+      "process_mem_mb": 10.54,
+      "requests_so_far": 9023
+    },
+    {
+      "elapsed_sec": 27.0,
+      "cpu_percent": 99.03,
+      "mem_percent": 0.51,
+      "mem_used_mb": 10.54,
+      "process_mem_mb": 10.54,
+      "requests_so_far": 9372
+    },
+    {
+      "elapsed_sec": 28.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.51,
+      "mem_used_mb": 10.54,
+      "process_mem_mb": 10.54,
+      "requests_so_far": 9722
+    },
+    {
+      "elapsed_sec": 29.0,
+      "cpu_percent": 100.0,
+      "mem_percent": 0.51,
+      "mem_used_mb": 10.54,
+      "process_mem_mb": 10.54,
+      "requests_so_far": 10067
+    },
+    {
+      "elapsed_sec": 30.0,
+      "cpu_percent": 17.0,
+      "mem_percent": 0.51,
+      "mem_used_mb": 10.54,
+      "process_mem_mb": 10.54,
+      "requests_so_far": 10128
+    }
+  ]
+}

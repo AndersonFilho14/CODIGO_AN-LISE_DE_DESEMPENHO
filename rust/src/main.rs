@@ -7,7 +7,10 @@ use serde::{Deserialize, Serialize};
 use std::{
     env,
     net::SocketAddr,
-    sync::{Arc, Mutex},
+    sync::{
+        atomic::{AtomicU64, Ordering},
+        Arc, Mutex,
+    },
     time::{Duration, Instant},
 };
 use sysinfo::{Pid, System};
@@ -62,22 +65,23 @@ struct MetricsResponse {
     history: Vec<MetricSample>,
 }
 
-struct MetricsState {
+struct MetricsHistory {
     start_time: Instant,
-    total_requests: u64,
-    mem_total_mb: f64,
     history: Vec<MetricSample>,
 }
 
-type SharedState = Arc<Mutex<MetricsState>>;
+struct AppState {
+    total_requests: AtomicU64,
+    mem_total_mb: f64,
+    metrics: Mutex<MetricsHistory>,
+}
+
+type SharedState = Arc<AppState>;
 
 fn round2(val: f64) -> f64 {
     (val * 100.0).round() / 100.0
 }
 
-/// Carga intensiva de CPU (CPU-bound):
-/// Verifica numeros primos ate N por divisao direta O(N * sqrt(N))
-/// exatamente com a mesma logica de Java e Python.
 fn count_primes(limit: u32) -> u64 {
     let mut count: u64 = 0;
     for num in 2..=limit {
@@ -111,10 +115,7 @@ async fn compute_handler(
     .await
     .unwrap();
 
-    {
-        let mut guard = state.lock().unwrap();
-        guard.total_requests += 1;
-    }
+    state.total_requests.fetch_add(1, Ordering::Relaxed);
 
     Json(ComputeResponse {
         lang: "rust",
@@ -125,9 +126,14 @@ async fn compute_handler(
 }
 
 async fn metrics_handler(State(state): State<SharedState>) -> Json<MetricsResponse> {
-    let guard = state.lock().unwrap();
-    let duration_sec = round2(guard.start_time.elapsed().as_secs_f64());
-    let samples = guard.history.clone();
+    let total_requests = state.total_requests.load(Ordering::Relaxed);
+    let (duration_sec, samples) = {
+        let guard = state.metrics.lock().unwrap();
+        (
+            round2(guard.start_time.elapsed().as_secs_f64()),
+            guard.history.clone(),
+        )
+    };
     let count = samples.len();
 
     let (cpu_avg, cpu_max, mem_avg, mem_max, mem_used_max, proc_mem_max) = if count > 0 {
@@ -155,13 +161,13 @@ async fn metrics_handler(State(state): State<SharedState>) -> Json<MetricsRespon
         summary: MetricsSummary {
             duration_sec,
             samples_count: count,
-            total_requests: guard.total_requests,
+            total_requests,
             cpu_percent_avg: cpu_avg,
             cpu_percent_max: cpu_max,
             mem_percent_avg: mem_avg,
             mem_percent_max: mem_max,
             mem_used_mb_max: mem_used_max,
-            mem_total_mb: guard.mem_total_mb,
+            mem_total_mb: state.mem_total_mb,
             process_mem_mb_max: proc_mem_max,
         },
         history: samples,
@@ -169,10 +175,12 @@ async fn metrics_handler(State(state): State<SharedState>) -> Json<MetricsRespon
 }
 
 async fn reset_metrics_handler(State(state): State<SharedState>) -> Json<HealthResponse> {
-    let mut guard = state.lock().unwrap();
-    guard.start_time = Instant::now();
-    guard.total_requests = 0;
-    guard.history.clear();
+    state.total_requests.store(0, Ordering::Relaxed);
+    {
+        let mut guard = state.metrics.lock().unwrap();
+        guard.start_time = Instant::now();
+        guard.history.clear();
+    }
 
     Json(HealthResponse {
         status: "metrics_reset",
@@ -196,16 +204,36 @@ async fn main() {
 
     let mut sys = System::new_all();
     sys.refresh_memory();
-    let mem_total_mb = round2(sys.total_memory() as f64 / (1024.0 * 1024.0));
+    sys.refresh_cpu();
 
-    let state: SharedState = Arc::new(Mutex::new(MetricsState {
-        start_time: Instant::now(),
-        total_requests: 0,
+    let total_vcpus = sys.cpus().len().max(1);
+    let limit_cores: usize = env::var("LIMIT_CORES")
+        .ok()
+        .and_then(|c| c.parse().ok())
+        .unwrap_or(total_vcpus)
+        .max(1);
+
+    let limit_ram_mb: f64 = env::var("LIMIT_RAM_MB")
+        .ok()
+        .and_then(|r| r.parse().ok())
+        .unwrap_or(0.0);
+
+    let vm_total_mb = round2(sys.total_memory() as f64 / (1024.0 * 1024.0));
+    let mem_total_mb = if limit_ram_mb > 0.0 {
+        limit_ram_mb
+    } else {
+        vm_total_mb
+    };
+
+    let state: SharedState = Arc::new(AppState {
+        total_requests: AtomicU64::new(0),
         mem_total_mb,
-        history: Vec::new(),
-    }));
+        metrics: Mutex::new(MetricsHistory {
+            start_time: Instant::now(),
+            history: Vec::new(),
+        }),
+    });
 
-    // Thread em background (equivalente ao psutil) coletando CPU e RAM a cada 1 segundo
     let monitor_state = Arc::clone(&state);
     tokio::spawn(async move {
         let pid = Pid::from_u32(std::process::id());
@@ -217,23 +245,33 @@ async fn main() {
             sys.refresh_memory();
             sys.refresh_process(pid);
 
-            let cpu_pct = sys.global_cpu_info().cpu_usage() as f64;
-            let total_mem = sys.total_memory() as f64;
-            let used_mem = sys.used_memory() as f64;
-            let mem_pct = if total_mem > 0.0 {
-                (used_mem / total_mem) * 100.0
-            } else {
-                0.0
-            };
-            let mem_used_mb = used_mem / (1024.0 * 1024.0);
+            let cpus = sys.cpus();
+            let active_count = limit_cores.min(cpus.len()).max(1);
+            let cpu_sum: f32 = cpus.iter().take(active_count).map(|c| c.cpu_usage()).sum();
+            let cpu_pct = (cpu_sum as f64) / (active_count as f64);
+
             let proc_mem_mb = sys
                 .process(pid)
                 .map(|p| p.memory() as f64 / (1024.0 * 1024.0))
                 .unwrap_or(0.0);
 
-            let mut guard = monitor_state.lock().unwrap();
+            let (mem_used_mb, mem_pct) = if limit_ram_mb > 0.0 {
+                let pct = ((proc_mem_mb / limit_ram_mb) * 100.0).min(100.0);
+                (proc_mem_mb, pct)
+            } else {
+                let total_mem = sys.total_memory() as f64;
+                let used_mem = sys.used_memory() as f64;
+                let pct = if total_mem > 0.0 {
+                    (used_mem / total_mem) * 100.0
+                } else {
+                    0.0
+                };
+                (used_mem / (1024.0 * 1024.0), pct)
+            };
+
+            let reqs = monitor_state.total_requests.load(Ordering::Relaxed);
+            let mut guard = monitor_state.metrics.lock().unwrap();
             let elapsed_sec = round2(guard.start_time.elapsed().as_secs_f64());
-            let reqs = guard.total_requests;
             guard.history.push(MetricSample {
                 elapsed_sec,
                 cpu_percent: round2(cpu_pct),
@@ -253,10 +291,10 @@ async fn main() {
         .with_state(state);
 
     let addr = SocketAddr::from(([0, 0, 0, 0], port));
-    println!("[Rust] Servidor rodando em http://{}", addr);
-    println!("  -> Carga CPU : http://{}/compute?n=50000", addr);
-    println!("  -> Metricas  : http://{}/metrics", addr);
-    println!("  -> Resetar   : http://{}/metrics/reset", addr);
+    println!(
+        "[Rust/Axum] Servidor rodando em http://{} (Cores={}, RAM={}MB)",
+        addr, limit_cores, mem_total_mb
+    );
 
     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
     axum::serve(listener, app).await.unwrap();
